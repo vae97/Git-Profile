@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {Button, Grid, TextField, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles'
 import Axios from 'axios';
-
+import Animation from '../src/Animation'
 
 
 //import icons
@@ -21,7 +21,7 @@ const useStyles= makeStyles((themes)=>({
 
   search:{
     textAlign:"center",
-
+    width:"100%",
   },
   searchBar:{
     width:"50%",
@@ -39,6 +39,9 @@ const useStyles= makeStyles((themes)=>({
     '&:hover' :{
       backgroundColor:"#ccd9ff",
       color:"black"
+    },
+    [themes.breakpoints.up('md')]:{
+      marginBottom:"90%",
     }
   },
 
@@ -69,8 +72,12 @@ const useStyles= makeStyles((themes)=>({
   text:{
     fontSize:"20px",
     color:"black",
-    paddingTop:"20px"
-  
+    paddingTop:"20px",
+    paddingBottom:"20px"
+  },
+  datas:{
+    backgroundColor:"#f0f0f5",
+    borderRadius:"20px"
   },
   statgrid:{
     textAlign:"center"
@@ -79,6 +86,25 @@ const useStyles= makeStyles((themes)=>({
     width:"90%",
     marginTop:"30px",
     margin:"auto"
+  },
+  footer:{
+    backgroundColor:"white",
+    [themes.breakpoints.down('xs')]:{
+      height:"100px",
+      backgroundColor:"#0366d6",
+    }
+  },
+  deignedby:{
+    marginTop:"100px",
+    marginLeft:"20px",
+    color:"#0366d6",
+    fontWeight:"bold",
+    marginBottom:"20px",
+    [themes.breakpoints.down('xs')]:{
+      marginTop:"50px",
+      color:"white",
+      marginLeft:"10px",
+    }
   }
 }))
 
@@ -160,7 +186,7 @@ function App() {
 
         <Grid item xs={12} md={4} className={classes.search}>
           <h1 className={classes.skygit}>Sky-Git</h1>
-          <TextField id="outlined-basic" label="User Name" variant="outlined" onChange={Read} className={classes.searchBar}/><br></br>
+          <TextField id="outlined-basic" label="GitHub User Name" variant="outlined" onChange={Read} className={classes.searchBar}/><br></br>
           <Button onClick={Request} className={classes.Button}>Search</Button>
         </Grid>
 
@@ -173,7 +199,7 @@ function App() {
             ?
 
                  <div>
-                    <Grid container>
+                    <Grid container className={classes.datas}>
                       <Grid item xs={12} md={12} className={classes.propicGrid}>
                         <img src={pic} className={classes.pic} alt="pic"></img>
                         <h2 className={classes.name}>{name}</h2>
@@ -218,9 +244,18 @@ function App() {
             :
 
                  <div>
-                   <h1>Type Something</h1>
+                   <Grid container>
+                     <Grid item md={3}></Grid>
+                     <Grid item xs={12} md={6}>
+                       <Animation></Animation>
+                     </Grid>
+                     <Grid item md={3}></Grid>
+                   </Grid>
                  </div>
           }
+        </Grid>
+        <Grid item xs={12} md={12} className={classes.footer}>
+          <Typography className={classes.deignedby}>• Designed and developed by Akash Ekanayaka</Typography>
         </Grid>
       </Grid>
     </div>
